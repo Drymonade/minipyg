@@ -17,18 +17,20 @@ def delete_package(package):
 
 
 def entry():
-    # basic cli command parser
     parser = argparse.ArgumentParser(prog='minipyg')
     parser.add_argument('command')
 
     args = parser.parse_args()
 
-    # checking dependencies
+    if args.commend == 'install':
+        pass
+
+    if args.command == 'uninstall':
+        pass
+
     if args.command in ('update', 'run'):
 
-        # we can work only inside venv
         if sys.prefix != sys.base_prefix:
-            # collecting actual dependencies from venv
             pr = subprocess.run(['pip', 'freeze'], stdout=subprocess.PIPE)
             actual_deps = list(
                 map(
@@ -47,7 +49,6 @@ def entry():
                 if _d[0] != 'minipyg':
                     actual_deps_dict[_d[0]] = _d[1]
 
-            # collecting incoming dependencies
             incoming_deps_dict = {}
 
             with open('requirements.txt') as f:
@@ -77,7 +78,6 @@ def entry():
         else:
             print('You are outside of the venv. Please activate it via `source venv/bin/activate` command.')
 
-    # handle 'run' command
     if args.command == 'run':
         with open('minipyg.json') as f:
             d = json.load(f)
