@@ -6,7 +6,7 @@ Simple(st) python dependency manager
 python3 -m pip install minipyg
 ```
 ## Prerequisites
-It is supposed that you use `requirements.txt` as main dependency file of your project, also you should work inside an activated virtual environment.
+You should work inside an activated virtual environment.
 ## Usage
 If you need to install some package, you just run:
 ```bash
@@ -24,7 +24,9 @@ minipyg update
 In `minipig.json` file you can specify a run command that launch your project, for example:
 ```json
 {
-  "run": "python3 manage.py runserver"
+    "commands": {
+        "run": "python3 manage.py runserver"
+    }
 }
 ```
 Then running the command:
